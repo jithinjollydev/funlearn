@@ -1,7 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:funlearn/homepage.dart';
+import 'package:funlearn/signin.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPageView extends StatefulWidget {
   const LoginPageView({super.key});
@@ -59,7 +61,9 @@ class LoginPageViewState extends State<LoginPageView> {
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(() => const SignInView());
+                          },
                           child: const Text("Create account")),
                     ),
                     FloatingActionButton.extended(
@@ -79,17 +83,25 @@ class LoginPageViewState extends State<LoginPageView> {
   }
 
   login(username, password) async {
-    // var pref = await SharedPreferences.getInstance();
-    if (username == "user" && password == "user") {
-      Get.off(() => const HomePageView());
+    var pref = await SharedPreferences.getInstance();
+    if (pref.containsKey("username") && pref.containsKey("password")) {
+      if (pref.getString("username") == username &&
+          pref.getString("password") == password) {
+        Get.off(() => const HomePageView());
+      }
     } else {
-      Get.snackbar(
-        //methoid 1
-        "Invalid Credentials!",
-        "Please check the details entered!",
-        icon: const Icon(Icons.error),
-      );
+      if (username == "user" && password == "user") {
+        Get.off(() => const HomePageView());
+      } else {
+        Get.snackbar(
+          //methoid 1
+          "Invalid Credentials!",
+          "Please check the details entered!",
+          icon: const Icon(Icons.error),
+        );
+      }
     }
+
     // Get.showSnackbar(const GetSnackBar(//method 2
     //   title: "Invalid Credentials!",
     //   message: "Please check the details entered!",

@@ -3,12 +3,13 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:funlearn/homepage.dart';
+import 'package:funlearn/loginpage.dart';
 import 'package:get/get.dart';
 
 void main() {
   runApp(const GetMaterialApp(
     debugShowCheckedModeBanner: false,
-    home: HomePageView(),
+    home: SplashScreen(),
   ));
 }
 
@@ -21,7 +22,7 @@ class SplashScreen extends StatelessWidget {
       //this widget determine the duration for thepage to exist
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const HomePageView(),
+          builder: (context) => const LoginPageView(),
         ),
       );
     });

@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:funlearn/homepage.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPageView extends StatefulWidget {
   const LoginPageView({super.key});
@@ -81,10 +80,11 @@ class LoginPageViewState extends State<LoginPageView> {
 
   login(username, password) async {
     // var pref = await SharedPreferences.getInstance();
-    if (username == "Student" && password == "student") {
-      Get.off(const HomePageView());
+    if (username == "user" && password == "user") {
+      Get.off(() => const HomePageView());
     } else {
-      Get.snackbar(//methoid 1
+      Get.snackbar(
+        //methoid 1
         "Invalid Credentials!",
         "Please check the details entered!",
         icon: const Icon(Icons.error),
